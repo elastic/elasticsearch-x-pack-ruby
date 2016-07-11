@@ -1,41 +1,43 @@
-# Elasticsearch::Xpack
+# Elasticsearch::XPack
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/elasticsearch/xpack`. To experiment with that code, run `bin/console` for an interactive prompt.
+A Ruby integration for the [X-Pack extensions](https://www.elastic.co/v5)
+for Elasticsearch.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Install the package from [Rubygems](https://rubygems.org):
 
-```ruby
-gem 'elasticsearch-xpack'
-```
+    gem install elasticsearch-xpack
 
-And then execute:
+To use an unreleased version, either add it to your `Gemfile` for [Bundler](http://gembundler.com):
 
-    $ bundle
+    gem 'elasticsearch-xpack', git: 'git://github.com/elastic/elasticsearch-ruby-xpack.git'
 
-Or install it yourself as:
+or install it from a source code checkout:
 
-    $ gem install elasticsearch-xpack
+    git clone https://github.com/elasticsearch/elasticsearch-ruby-xpack.git
+    bundle install
+    rake install
 
 ## Usage
 
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/elasticsearch-xpack.
-
+`TODO`
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+This software is licensed under the Apache 2 license, quoted below.
 
+    Copyright (c) 2016 Elasticsearch <http://www.elasticsearch.org>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
