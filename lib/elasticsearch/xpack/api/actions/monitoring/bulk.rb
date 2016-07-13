@@ -4,7 +4,7 @@ module Elasticsearch
       module Monitoring
         module Actions
 
-          # TODO: Description
+          # Insert monitoring data in bulk
           #
           # @option arguments [String] :type Default document type for items which don't provide one
           # @option arguments [Hash] :body The operation definition and data (action-data pairs), separated by newlines (*Required*)
