@@ -4,11 +4,13 @@ module Elasticsearch
       module Graph
         module Actions
 
-          # TODO: Description
+          # Get structured information about the vertices and connections in a dataset
           #
-          # @option arguments [List] :index A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices
-          # @option arguments [List] :type A comma-separated list of document types to search; leave empty to perform the operation on all types
-          # @option arguments [Hash] :body Graph Query DSL
+          # @option arguments [List] :index A comma-separated list of index names to search;
+          #                                 use `_all` or empty string to perform the operation on all indices
+          # @option arguments [List] :type A comma-separated list of document types to search;
+          #                                leave empty to perform the operation on all types
+          # @option arguments [Hash] :body The Graph Query DSL definition
           # @option arguments [String] :routing Specific routing value
           # @option arguments [Time] :timeout Explicit operation timeout
           #
