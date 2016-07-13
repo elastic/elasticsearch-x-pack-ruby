@@ -31,8 +31,8 @@ require 'elasticsearch/xpack'
 
 client = Elasticsearch::Client.new url: 'http://elastic:changeme@localhost:9200'
 
-client.xpack.license.get
-# => {"license"=> {"status"=>"active", ...}
+client.xpack.info
+# => {"build"=> ..., "features"=> ...}
 ```
 
 The integration is designed as a standalone `Elasticsearch::XPack::API` module, so it's easy
