@@ -22,7 +22,24 @@ or install it from a source code checkout:
 
 ## Usage
 
-`TODO`
+If you use the official [Ruby client for Elasticsearch](https://github.com/elastic/elasticsearch-ruby),
+require the library in your code, and all the methods will be automatically available in the `xpack` namespace:
+
+```ruby
+require 'elasticsearch'
+require 'elasticsearch/xpack'
+
+client = Elasticsearch::Client.new url: 'http://elastic:changeme@localhost:9200'
+
+client.xpack.license.get
+# => {"license"=> {"status"=>"active", ...}
+```
+
+The integration is designed as a standalone `Elasticsearch::XPack::API` module, so it's easy
+to mix it into a different client, and the methods will be available in the top namespace.
+
+For documentation, look into the RDoc annotations in the source files, which contain links to the
+official [X-Pack for the Elastic Stack](https://www.elastic.co/guide/en/x-pack/current/index.html) documentation.
 
 ## License
 
