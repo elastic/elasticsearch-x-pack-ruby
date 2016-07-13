@@ -19,6 +19,7 @@ namespace :test do
     require 'ansi'
 
     suites = %w[
+      x-plugins/elasticsearch/x-pack/src/test/resources/rest-api-spec/test
       x-plugins/elasticsearch/x-pack/graph/src/test/resources/rest-api-spec/test
       x-plugins/elasticsearch/x-pack/monitoring/src/test/resources/rest-api-spec/test/monitoring
       x-plugins/elasticsearch/x-pack/security/src/test/resources/rest-api-spec/test
