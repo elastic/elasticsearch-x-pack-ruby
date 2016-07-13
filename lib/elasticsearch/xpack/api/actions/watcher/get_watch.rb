@@ -4,11 +4,11 @@ module Elasticsearch
       module Watcher
         module Actions
 
-          # TODO: Description
+          # Retrieve a watch
           #
           # @option arguments [String] :id Watch ID (*Required*)
           #
-          # @see http://www.elastic.co/guide/en/watcher/current/appendix-api-get-watch.html
+          # @see https://www.elastic.co/guide/en/x-pack/current/watcher-api-get-watch.html
           #
           def get_watch(arguments={})
             raise ArgumentError, "Required argument 'id' missing" unless arguments[:id]

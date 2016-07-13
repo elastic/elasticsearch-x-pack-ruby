@@ -4,12 +4,12 @@ module Elasticsearch
       module Watcher
         module Actions
 
-          # TODO: Description
+          # Deactivate a currently active watch
           #
           # @option arguments [String] :watch_id Watch ID (*Required*)
           # @option arguments [Duration] :master_timeout Specify timeout for watch write operation
           #
-          # @see https://www.elastic.co/guide/en/watcher/current/api-rest.html#api-rest-deactivate-watch
+          # @see http://www.elastic.co/guide/en/x-pack/current/watcher-api-deactivate-watch.html
           #
           def deactivate_watch(arguments={})
             raise ArgumentError, "Required argument 'watch_id' missing" unless arguments[:watch_id]

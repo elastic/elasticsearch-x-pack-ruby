@@ -4,14 +4,14 @@ module Elasticsearch
       module Watcher
         module Actions
 
-          # TODO: Description
+          # Register a new watch in or update an existing one
           #
           # @option arguments [String] :id Watch ID (*Required*)
           # @option arguments [Hash] :body The watch (*Required*)
           # @option arguments [Duration] :master_timeout Specify timeout for watch write operation
           # @option arguments [Boolean] :active Specify whether the watch is in/active by default
           #
-          # @see http://www.elastic.co/guide/en/watcher/current/appendix-api-put-watch.html
+          # @see http://www.elastic.co/guide/en/x-pack/current/watcher-api-put-watch.html
           #
           def put_watch(arguments={})
             raise ArgumentError, "Required argument 'id' missing" unless arguments[:id]

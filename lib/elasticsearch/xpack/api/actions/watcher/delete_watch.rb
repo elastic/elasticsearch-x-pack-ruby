@@ -4,13 +4,13 @@ module Elasticsearch
       module Watcher
         module Actions
 
-          # TODO: Description
+          # Remove a watch
           #
           # @option arguments [String] :id Watch ID (*Required*)
           # @option arguments [Duration] :master_timeout Specify timeout for watch write operation
           # @option arguments [Boolean] :force Specify if this request should be forced and ignore locks
           #
-          # @see http://www.elastic.co/guide/en/watcher/current/appendix-api-delete-watch.html
+          # @see http://www.elastic.co/guide/en/x-pack/current/appendix-api-delete-watch.html
           #
           def delete_watch(arguments={})
             raise ArgumentError, "Required argument 'id' missing" unless arguments[:id]

@@ -4,10 +4,10 @@ module Elasticsearch
       module Watcher
         module Actions
 
-          # TODO: Description
+          # Start the Watcher service
           #
           #
-          # @see http://www.elastic.co/guide/en/watcher/current/appendix-api-service.html
+          # @see http://www.elastic.co/guide/en/x-pack/current/watcher-api-start.html
           #
           def start(arguments={})
             method = HTTP_PUT

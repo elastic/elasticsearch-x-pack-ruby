@@ -4,13 +4,13 @@ module Elasticsearch
       module Watcher
         module Actions
 
-          # TODO: Description
+          # Acknowledge watch actions to throttle their executions
           #
           # @option arguments [String] :watch_id Watch ID (*Required*)
-          # @option arguments [List] :action_id A comma-separated list of the action ids to be acked
+          # @option arguments [List] :action_id A comma-separated list of the action ids to be acked (default: all)
           # @option arguments [Duration] :master_timeout Specify timeout for watch write operation
           #
-          # @see http://www.elastic.co/guide/en/watcher/current/appendix-api-ack-watch.html
+          # @see http://www.elastic.co/guide/en/x-pack/current/watcher-api-ack-watch.html
           #
           def ack_watch(arguments={})
             raise ArgumentError, "Required argument 'watch_id' missing" unless arguments[:watch_id]
