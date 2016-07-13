@@ -4,11 +4,11 @@ module Elasticsearch
       module Security
         module Actions
 
-          # TODO: Description
+          # Retrieve one or more roles from the native realm
           #
           # @option arguments [String] :name Role name
           #
-          # @see Retrieve one or more roles from the native shield realm
+          # @see https://www.elastic.co/guide/en/x-pack/current/security-api-roles.html#security-api-get-role
           #
           def get_role(arguments={})
             method = HTTP_GET

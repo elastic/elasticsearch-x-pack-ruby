@@ -4,11 +4,11 @@ module Elasticsearch
       module Security
         module Actions
 
-          # TODO: Description
+          # Retrieve one or more users from the native realm
           #
           # @option arguments [List] :username A comma-separated list of usernames
           #
-          # @see Retrieve one or more users from the native shield realm
+          # @see https://www.elastic.co/guide/en/x-pack/current/security-api-users.html#security-api-get-user
           #
           def get_user(arguments={})
             method = HTTP_GET

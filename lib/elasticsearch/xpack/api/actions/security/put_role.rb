@@ -4,13 +4,13 @@ module Elasticsearch
       module Security
         module Actions
 
-          # TODO: Description
+          # Update or create a role for the native shield realm
           #
           # @option arguments [String] :name Role name (*Required*)
           # @option arguments [Hash] :body The role to add (*Required*)
           # @option arguments [Boolean] :refresh Refresh the index after performing the operation
           #
-          # @see Update or create a role for the native shield realm
+          # @see https://www.elastic.co/guide/en/x-pack/current/security-api-roles.html#security-api-put-role
           #
           def put_role(arguments={})
             raise ArgumentError, "Required argument 'name' missing" unless arguments[:name]

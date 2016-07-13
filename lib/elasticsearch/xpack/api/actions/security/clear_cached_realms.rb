@@ -4,12 +4,12 @@ module Elasticsearch
       module Security
         module Actions
 
-          # TODO: Description
+          # Clears the internal user caches for specified realms
           #
           # @option arguments [String] :realms Comma-separated list of realms to clear (*Required*)
           # @option arguments [String] :usernames Comma-separated list of usernames to clear from the cache
           #
-          # @see Clears the internal user caches for specified realms
+          # @see https://www.elastic.co/guide/en/x-pack/current/security-api-clear-cache.html
           #
           def clear_cached_realms(arguments={})
             raise ArgumentError, "Required argument 'realms' missing" unless arguments[:realms]

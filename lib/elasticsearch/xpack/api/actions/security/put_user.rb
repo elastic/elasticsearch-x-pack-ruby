@@ -4,13 +4,13 @@ module Elasticsearch
       module Security
         module Actions
 
-          # TODO: Description
+          # Update or create a user for the native realm
           #
           # @option arguments [String] :username The username of the User (*Required*)
           # @option arguments [Hash] :body The user to add (*Required*)
           # @option arguments [Boolean] :refresh Refresh the index after performing the operation
           #
-          # @see Update or create a user for the native shield realm
+          # @see https://www.elastic.co/guide/en/x-pack/current/security-api-users.html#security-api-put-user
           #
           def put_user(arguments={})
             raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]

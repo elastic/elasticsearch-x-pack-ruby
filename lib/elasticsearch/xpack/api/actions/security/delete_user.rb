@@ -4,12 +4,12 @@ module Elasticsearch
       module Security
         module Actions
 
-          # TODO: Description
+          # Remove a user from the native realm
           #
           # @option arguments [String] :username username (*Required*)
           # @option arguments [Boolean] :refresh Refresh the index after performing the operation
           #
-          # @see Remove a user from the native shield realm
+          # @see https://www.elastic.co/guide/en/x-pack/current/security-api-users.html#security-api-delete-user
           #
           def delete_user(arguments={})
             valid_params = [

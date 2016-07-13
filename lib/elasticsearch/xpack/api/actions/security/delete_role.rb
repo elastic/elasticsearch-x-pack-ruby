@@ -4,12 +4,12 @@ module Elasticsearch
       module Security
         module Actions
 
-          # TODO: Description
+          # Remove a role from the native realm
           #
           # @option arguments [String] :name Role name (*Required*)
           # @option arguments [Boolean] :refresh Refresh the index after performing the operation
           #
-          # @see Remove a role from the native shield realm
+          # @see https://www.elastic.co/guide/en/x-pack/current/security-api-roles.html#security-api-delete-role
           #
           def delete_role(arguments={})
             raise ArgumentError, "Required argument 'name' missing" unless arguments[:name]
