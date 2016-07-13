@@ -1,6 +1,6 @@
 module Elasticsearch
-  module API
-    module XPack
+  module XPack
+    module API
       module Security
         module Actions
 
@@ -13,7 +13,7 @@ module Elasticsearch
           def clear_cached_roles(arguments={})
             raise ArgumentError, "Required argument 'name' missing" unless arguments[:name]
 
-            method = HTTP_PUT
+            method = Elasticsearch::API::HTTP_PUT
             path   = "_xpack/security/role/#{arguments[:name]}/_clear_cache"
             params = {}
             body   = nil

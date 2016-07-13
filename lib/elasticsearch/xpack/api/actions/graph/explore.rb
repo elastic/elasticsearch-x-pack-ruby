@@ -1,6 +1,6 @@
 module Elasticsearch
-  module API
-    module XPack
+  module XPack
+    module API
       module Graph
         module Actions
 
@@ -25,9 +25,9 @@ module Elasticsearch
             index = arguments.delete(:index)
             type  = arguments.delete(:type)
 
-            method = HTTP_GET
-            path   = Utils.__pathify Utils.__listify(index), Utils.__listify(type), '_xpack/graph/_explore'
-            params = Utils.__validate_and_extract_params arguments, valid_params
+            method = Elasticsearch::API::HTTP_GET
+            path   = Elasticsearch::API::Utils.__pathify Elasticsearch::API::Utils.__listify(index), Elasticsearch::API::Utils.__listify(type), '_xpack/graph/_explore'
+            params = Elasticsearch::API::Utils.__validate_and_extract_params arguments, valid_params
             body   = arguments[:body]
 
             perform_request(method, path, params, body).body

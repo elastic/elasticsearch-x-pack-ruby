@@ -1,6 +1,6 @@
 module Elasticsearch
-  module API
-    module XPack
+  module XPack
+    module API
       module Watcher
         module Actions
 
@@ -21,9 +21,9 @@ module Elasticsearch
               :master_timeout,
               :active ]
 
-            method = HTTP_PUT
+            method = Elasticsearch::API::HTTP_PUT
             path   = "_xpack/watcher/watch/#{arguments[:id]}"
-            params = Utils.__validate_and_extract_params arguments, valid_params
+            params = Elasticsearch::API::Utils.__validate_and_extract_params arguments, valid_params
             body   = arguments[:body]
 
             perform_request(method, path, params, body).body

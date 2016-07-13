@@ -1,6 +1,6 @@
 module Elasticsearch
-  module API
-    module XPack
+  module XPack
+    module API
       module Security
         module Actions
 
@@ -19,13 +19,13 @@ module Elasticsearch
             arguments = arguments.clone
             username  = arguments.delete(:username)
 
-            method = HTTP_DELETE
+            method = Elasticsearch::API::HTTP_DELETE
             path   = "_xpack/security/user/#{username}"
-            params = Utils.__validate_and_extract_params arguments, valid_params
+            params = Elasticsearch::API::Utils.__validate_and_extract_params arguments, valid_params
             body   = nil
 
             if Array(arguments[:ignore]).include?(404)
-              Utils.__rescue_from_not_found { perform_request(method, path, params, body).body }
+              Elasticsearch::API::Utils.__rescue_from_not_found { perform_request(method, path, params, body).body }
             else
               perform_request(method, path, params, body).body
             end

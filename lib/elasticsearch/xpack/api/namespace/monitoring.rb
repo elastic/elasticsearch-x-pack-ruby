@@ -1,11 +1,11 @@
 module Elasticsearch
-  module API
-    module XPack
+  module XPack
+    module API
       module Monitoring
         module Actions; end
 
         class MonitoringClient
-          include Common::Client, Common::Client::Base, Monitoring::Actions
+          include Elasticsearch::API::Common::Client, Elasticsearch::API::Common::Client::Base, Monitoring::Actions
         end
 
         def monitoring

@@ -1,6 +1,6 @@
 module Elasticsearch
-  module API
-    module XPack
+  module XPack
+    module API
       module License
         module Actions
 
@@ -9,7 +9,7 @@ module Elasticsearch
           # @see https://www.elastic.co/guide/en/shield/current/license-management.html
           #
           def delete(arguments={})
-            method = HTTP_DELETE
+            method = Elasticsearch::API::HTTP_DELETE
             path   = "_xpack/license"
             params = {}
             body   = nil

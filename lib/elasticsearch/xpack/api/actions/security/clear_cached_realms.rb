@@ -1,6 +1,6 @@
 module Elasticsearch
-  module API
-    module XPack
+  module XPack
+    module API
       module Security
         module Actions
 
@@ -19,9 +19,9 @@ module Elasticsearch
             arguments = arguments.clone
             realms = arguments.delete(:realms)
 
-            method = HTTP_POST
-            path   = Utils.__pathify "_xpack/security/realm/", Utils.__listify(realms), "_clear_cache"
-            params = Utils.__validate_and_extract_params arguments, valid_params
+            method = Elasticsearch::API::HTTP_POST
+            path   = Elasticsearch::API::Utils.__pathify "_xpack/security/realm/", Elasticsearch::API::Utils.__listify(realms), "_clear_cache"
+            params = Elasticsearch::API::Utils.__validate_and_extract_params arguments, valid_params
             body   = nil
 
             perform_request(method, path, params, body).body

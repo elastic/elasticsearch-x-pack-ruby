@@ -1,6 +1,6 @@
 module Elasticsearch
-  module API
-    module XPack
+  module XPack
+    module API
       module Monitoring
         module Actions
 
@@ -26,12 +26,12 @@ module Elasticsearch
             type = arguments.delete(:type)
             body = arguments.delete(:body)
 
-            method = HTTP_POST
-            path   = Utils.__pathify '_xpack/monitoring', type, '_bulk'
-            params = Utils.__validate_and_extract_params arguments, valid_params
+            method = Elasticsearch::API::HTTP_POST
+            path   = Elasticsearch::API::Utils.__pathify '_xpack/monitoring', type, '_bulk'
+            params = Elasticsearch::API::Utils.__validate_and_extract_params arguments, valid_params
 
             if body.is_a? Array
-              payload = Utils.__bulkify(body)
+              payload = Elasticsearch::API::Utils.__bulkify(body)
             else
               payload = body
             end

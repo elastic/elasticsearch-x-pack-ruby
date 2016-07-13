@@ -1,6 +1,6 @@
 module Elasticsearch
-  module API
-    module XPack
+  module XPack
+    module API
       module Watcher
         module Actions
 
@@ -13,7 +13,7 @@ module Elasticsearch
           def get_watch(arguments={})
             raise ArgumentError, "Required argument 'id' missing" unless arguments[:id]
 
-            method = HTTP_GET
+            method = Elasticsearch::API::HTTP_GET
             path   = "_xpack/watcher/watch/#{arguments[:id]}"
             params = {}
             body   = nil

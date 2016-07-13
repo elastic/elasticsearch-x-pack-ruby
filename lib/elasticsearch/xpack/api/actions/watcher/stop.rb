@@ -1,6 +1,6 @@
 module Elasticsearch
-  module API
-    module XPack
+  module XPack
+    module API
       module Watcher
         module Actions
 
@@ -10,7 +10,7 @@ module Elasticsearch
           # @see http://www.elastic.co/guide/en/x-pack/current/watcher-api-stop.html
           #
           def stop(arguments={})
-            method = HTTP_PUT
+            method = Elasticsearch::API::HTTP_PUT
             path   = "_xpack/watcher/_stop"
             params = {}
             body   = nil

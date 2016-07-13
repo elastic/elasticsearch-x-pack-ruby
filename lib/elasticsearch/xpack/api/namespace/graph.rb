@@ -1,11 +1,11 @@
 module Elasticsearch
-  module API
-    module XPack
+  module XPack
+    module API
       module Graph
         module Actions; end
 
         class GraphClient
-          include Common::Client, Common::Client::Base, Graph::Actions
+          include Elasticsearch::API::Common::Client, Elasticsearch::API::Common::Client::Base, Graph::Actions
         end
 
         def graph

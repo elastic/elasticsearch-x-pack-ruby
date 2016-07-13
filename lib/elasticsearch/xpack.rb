@@ -5,17 +5,17 @@ Dir[ File.expand_path('../xpack/api/actions/**/*.rb', __FILE__) ].each   { |f| r
 Dir[ File.expand_path('../xpack/api/namespace/**/*.rb', __FILE__) ].each { |f| require f }
 
 module Elasticsearch
-  module API
-    module XPack
+  module XPack
+    module API
       def self.included(base)
-        Elasticsearch::API::XPack.constants.reject {|c| c == :Client }.each do |m|
-          base.__send__ :include, Elasticsearch::API::XPack.const_get(m)
+        Elasticsearch::XPack::API.constants.reject {|c| c == :Client }.each do |m|
+          base.__send__ :include, Elasticsearch::XPack::API.const_get(m)
         end
       end
 
       class Client
         include Elasticsearch::API::Common::Client, Elasticsearch::API::Common::Client::Base
-        include Elasticsearch::API::XPack
+        include Elasticsearch::XPack::API
       end
     end
   end
@@ -25,7 +25,7 @@ module Elasticsearch
   module Transport
     class Client
       def xpack
-        @xpack_client ||= Elasticsearch::API::XPack::Client.new(self)
+        @xpack_client ||= Elasticsearch::XPack::API::Client.new(self)
       end
     end
   end
