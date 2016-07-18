@@ -10,7 +10,7 @@ module Elasticsearch
           # @see http://www.elastic.co/guide/en/x-pack/current/watcher-api-start.html
           #
           def start(arguments={})
-            method = Elasticsearch::API::HTTP_PUT
+            method = Elasticsearch::API::HTTP_POST
             path   = "_xpack/watcher/_start"
             params = {}
             body   = nil
