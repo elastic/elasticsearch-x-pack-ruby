@@ -12,11 +12,11 @@ Install the package from [Rubygems](https://rubygems.org):
 
 To use an unreleased version, either add it to your `Gemfile` for [Bundler](http://gembundler.com):
 
-    gem 'elasticsearch-xpack', git: 'git://github.com/elastic/elasticsearch-ruby-xpack.git'
+    gem 'elasticsearch-xpack', git: 'git://github.com/elastic/elasticsearch-xpack-ruby.git'
 
 or install it from a source code checkout:
 
-    git clone https://github.com/elasticsearch/elasticsearch-ruby-xpack.git
+    git clone https://github.com/elasticsearch/elasticsearch-xpack-ruby.git
     bundle install
     rake install
 
