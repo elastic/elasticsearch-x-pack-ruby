@@ -41,6 +41,8 @@ to mix it into a different client, and the methods will be available in the top 
 For documentation, look into the RDoc annotations in the source files, which contain links to the
 official [X-Pack for the Elastic Stack](https://www.elastic.co/guide/en/x-pack/current/index.html) documentation.
 
+For examples, look into the [`examples`](examples) folder in this repository.
+
 ## License
 
 This software is licensed under the Apache 2 license, quoted below.
