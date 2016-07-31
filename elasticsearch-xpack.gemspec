@@ -7,11 +7,11 @@ Gem::Specification.new do |spec|
   spec.name          = "elasticsearch-xpack"
   spec.version       = Elasticsearch::XPack::VERSION
   spec.authors       = ["Karel Minarik"]
-  spec.email         = ["karmi@karmi.cz"]
+  spec.email         = ["karel@elastic.co"]
 
   spec.summary       = "Ruby integrations for the X-Pack extensions for Elasticsearch"
   spec.description   = "Ruby integrations for the X-Pack extensions for Elasticsearch"
-  spec.homepage      = "https://github.com/elastic/elasticsearch-ruby-xpack"
+  spec.homepage      = "https://github.com/elastic/elasticsearch-xpack-ruby"
   spec.license       = "Apache 2"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
