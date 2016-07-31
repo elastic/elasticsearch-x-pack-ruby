@@ -8,7 +8,7 @@ for Elasticsearch.
 
 Install the package from [Rubygems](https://rubygems.org):
 
-    gem install elasticsearch-xpack
+    gem install elasticsearch-xpack --pre
 
 To use an unreleased version, either add it to your `Gemfile` for [Bundler](http://gembundler.com):
 
