@@ -23,8 +23,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "elasticsearch-api"
 
-  spec.add_development_dependency "elasticsearch"
-  spec.add_development_dependency "elasticsearch-transport"
+  spec.add_development_dependency "elasticsearch", '~> 5'
+  spec.add_development_dependency "elasticsearch-transport", '~> 5'
   spec.add_development_dependency "elasticsearch-extensions"
 
   spec.add_development_dependency "activesupport"
