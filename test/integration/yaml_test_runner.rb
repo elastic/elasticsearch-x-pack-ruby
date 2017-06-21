@@ -162,7 +162,14 @@ module Elasticsearch
               attr = attr.gsub(/_____/, '.')
               attr = $stash[attr] if attr.start_with? '$'
             end
-            memo = memo.is_a?(Hash) ? memo[attr] : memo[attr.to_i]
+            case
+              when memo.is_a?(Hash) && attr
+                memo = memo[attr]
+              when memo.is_a?(Array) && attr && attr =~ /^\d+$/
+                memo = memo[attr.to_i]
+              else
+                memo = memo
+            end
           end
           memo
         end
