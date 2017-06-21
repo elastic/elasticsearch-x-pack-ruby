@@ -12,6 +12,8 @@ require 'elasticsearch/extensions/test/cluster'
 require 'elasticsearch/extensions/test/startup_shutdown'
 require 'elasticsearch/extensions/test/profiling' unless JRUBY
 
+require 'test_helper'
+
 # Skip features
 skip_features = 'stash_in_path,requires_replica'
 SKIP_FEATURES = ENV.fetch('TEST_SKIP_FEATURES', skip_features)
@@ -70,14 +72,20 @@ $tracer.formatter = proc { |severity, datetime, progname, msg| "#{msg}\n" }
 
 $url = ENV.fetch('TEST_CLUSTER_URL', "http://elastic:changeme@localhost:#{ENV['TEST_CLUSTER_PORT'] || 9260}")
 
-$client = Elasticsearch::Client.new url: $url
+$client        ||= Elasticsearch::Client.new url: $url
+$helper_client ||= Elasticsearch::Client.new url: $url
 
-$es_version = $client.info['version']['number']
+es_version_info = $helper_client.info['version']
+plugins         = $helper_client.cat.plugins(format: 'json')
+$es_version = es_version_info['number']
+
+puts '-'*80,
+     "Elasticsearch #{$es_version.ansi(:bold)} [#{es_version_info['build_hash'].to_s[0...7]}]",
+     "Plugins: " + plugins.map { |d| "#{d['component'].ansi(:bold)}:#{d['version']}"}.join(', '),
+     '-'*80
 
 $client.transport.logger = $logger unless ENV['QUIET'] || ENV['CI']
 $original_client = $client.clone
-
-require 'test_helper'
 
 module Elasticsearch
   module YamlTestSuite
@@ -239,7 +247,7 @@ suites.each do |suite|
     # --- Register context setup -------------------------------------------
     #
     setup do
-      $client.indices.delete index: '_all', ignore: 404
+      $helper_client.indices.delete index: '_all', ignore: 404
       $results = {}
       $stash   = {}
     end
@@ -247,7 +255,7 @@ suites.each do |suite|
     # --- Register context teardown ----------------------------------------
     #
     teardown do
-      $client.indices.delete index: '_all', ignore: 404
+      $helper_client.indices.delete index: '_all', ignore: 404 if ENV['CLEANUP']
     end
 
     # --- Parse tests ------------------------------------------------------
