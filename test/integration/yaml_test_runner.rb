@@ -233,8 +233,10 @@ end
 
 include Elasticsearch::YamlTestSuite
 
-rest_api_test_source = '../../../../x-plugins/elasticsearch/x-pack/*/src/test/resources/rest-api-spec/test/'
+rest_api_test_source = '../../../../x-pack-elasticsearch/plugin/src/test/resources/rest-api-spec/test'
 PATH = Pathname(ENV.fetch('TEST_REST_API_SPEC', File.expand_path(rest_api_test_source, __FILE__)))
+raise Errno::ENOENT, "#{PATH}" unless PATH.exist?
+
 suites  = Dir.glob(PATH.join('*')).map { |d| Pathname(d) }
 suites  = suites.select { |s| s.to_s =~ Regexp.new(ENV['FILTER']) } if ENV['FILTER']
 
