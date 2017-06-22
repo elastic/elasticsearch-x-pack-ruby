@@ -259,6 +259,22 @@ suites.each do |suite|
       $helper_client.indices.delete index: '_all', ignore: 404
       $results = {}
       $stash   = {}
+
+      # Cleanup for machine learning
+      # https://github.com/elastic/x-pack-elasticsearch/blob/5.5/plugin/src/test/java/org/elasticsearch/xpack/ml/integration/MlRestTestStateCleaner.java
+      $helper_client.xpack.ml.stop_datafeed datafeed_id: '_all', force: true
+      $helper_client.xpack.ml.get_datafeeds['datafeeds'].each do |d|
+        $helper_client.xpack.ml.delete_datafeed datafeed_id: d['datafeed_id']
+      end
+
+      $helper_client.xpack.ml.close_job job_id: '_all', force: true
+      $helper_client.xpack.ml.get_jobs['jobs'].each do |d|
+        $helper_client.xpack.ml.delete_job job_id: d['job_id']
+      end
+
+      # $helper_client.cat.tasks(format: 'json')
+
+      $helper_client.indices.delete index: '.ml-*', ignore: 404
     end
 
     # --- Register context teardown ----------------------------------------
