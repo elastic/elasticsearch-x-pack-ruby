@@ -15,7 +15,7 @@ require 'elasticsearch/extensions/test/profiling' unless JRUBY
 require 'test_helper'
 
 # Skip features
-skip_features = 'stash_in_path,requires_replica'
+skip_features = 'stash_in_path,requires_replica,headers,warnings'
 SKIP_FEATURES = ENV.fetch('TEST_SKIP_FEATURES', skip_features)
 
 # Launch test cluster
