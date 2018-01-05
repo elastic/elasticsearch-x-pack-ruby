@@ -1,18 +1,17 @@
 # Elasticsearch::XPack
 
-A Ruby integration for the [X-Pack extensions](https://www.elastic.co/v5)
-for Elasticsearch.
+A Ruby integration for the [X-Pack extension](https://www.elastic.co/guide/en/x-pack/current/xpack-introduction.html) for Elasticsearch.
 
 
 ## Installation
 
 Install the package from [Rubygems](https://rubygems.org):
 
-    gem install elasticsearch-xpack --pre
+    gem install elasticsearch-xpack
 
 To use an unreleased version, either add it to your `Gemfile` for [Bundler](http://gembundler.com):
 
-    gem 'elasticsearch-xpack', git: 'git://github.com/elastic/elasticsearch-xpack-ruby.git'
+    gem 'elasticsearch-xpack', git: 'https://github.com/elastic/elasticsearch-x-pack-ruby.git'
 
 or install it from a source code checkout:
 
