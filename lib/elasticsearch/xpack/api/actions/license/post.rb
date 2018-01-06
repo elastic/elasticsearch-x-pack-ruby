@@ -10,7 +10,7 @@ module Elasticsearch
           # @option arguments [Boolean] :acknowledge Whether the user has acknowledged acknowledge messages
           #                                          (default: false)
           #
-          # @see https://www.elastic.co/guide/en/shield/current/license-management.html
+          # @see https://www.elastic.co/guide/en/x-pack/current/license-management.html
           #
           def post(arguments={})
             valid_params = [ :acknowledge ]

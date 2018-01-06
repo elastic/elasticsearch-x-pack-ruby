@@ -6,7 +6,7 @@ module Elasticsearch
 
           # Delete a license
           #
-          # @see https://www.elastic.co/guide/en/shield/current/license-management.html
+          # @see https://www.elastic.co/guide/en/x-pack/current/license-management.html
           #
           def delete(arguments={})
             method = Elasticsearch::API::HTTP_DELETE
