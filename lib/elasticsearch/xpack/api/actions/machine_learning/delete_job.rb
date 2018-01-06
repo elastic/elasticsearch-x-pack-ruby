@@ -4,12 +4,12 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
+          # Delete an existing anomaly detection job
           #
           # @option arguments [String] :job_id The ID of the job to delete (*Required*)
           # @option arguments [Boolean] :force True if the job should be forcefully deleted
           #
-          # @see http://www.elastic.co/guide/en/x-pack/current/ml-delete-job.html
+          # @see http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html
           #
           def delete_job(arguments={})
             raise ArgumentError, "Required argument 'job_id' missing" unless arguments[:job_id]

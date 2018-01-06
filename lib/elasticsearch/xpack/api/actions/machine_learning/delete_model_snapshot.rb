@@ -4,12 +4,12 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
+          # Delete an existing model snapshot
           #
           # @option arguments [String] :job_id The ID of the job to fetch (*Required*)
           # @option arguments [String] :snapshot_id The ID of the snapshot to delete (*Required*)
           #
-          # @see http://www.elastic.co/guide/en/x-pack/current/ml-delete-snapshot.html
+          # @see http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html
           #
           def delete_model_snapshot(arguments={})
             raise ArgumentError, "Required argument 'job_id' missing" unless arguments[:job_id]

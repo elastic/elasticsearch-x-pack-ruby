@@ -4,20 +4,16 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
-          #
           # @option arguments [String] :filter_id The ID of the filter to fetch
           # @option arguments [Int] :from skips a number of filters
           # @option arguments [Int] :size specifies a max number of filters to get
-          #
-          # @see [TODO]
           #
           def get_filters(arguments={})
             valid_params = [
               :from,
               :size ]
             method = Elasticsearch::API::HTTP_GET
-            path   = "_xpack/ml/filters/#{arguments[:filter_id]}"
+            path   = Elasticsearch::API::Utils.__pathify "_xpack/ml/filters", arguments[:filter_id]
             params = Elasticsearch::API::Utils.__validate_and_extract_params arguments, valid_params
             body   = nil
 

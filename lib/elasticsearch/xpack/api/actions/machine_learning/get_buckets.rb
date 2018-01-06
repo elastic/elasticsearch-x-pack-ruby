@@ -4,7 +4,7 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
+          # Retrieve job results for one or more buckets
           #
           # @option arguments [String] :job_id ID of the job to get bucket results from (*Required*)
           # @option arguments [String] :timestamp The timestamp of the desired single bucket result
@@ -19,7 +19,7 @@ module Elasticsearch
           # @option arguments [String] :sort Sort buckets by a particular field
           # @option arguments [Boolean] :desc Set the sort direction
           #
-          # @see http://www.elastic.co/guide/en/x-pack/current/ml-get-bucket.html
+          # @see http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html
           #
           def get_buckets(arguments={})
             raise ArgumentError, "Required argument 'job_id' missing" unless arguments[:job_id]

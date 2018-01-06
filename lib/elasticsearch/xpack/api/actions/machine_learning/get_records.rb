@@ -4,7 +4,7 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
+          # Retrieve anomaly records for a job
           #
           # @option arguments [String] :job_id [TODO] (*Required*)
           # @option arguments [Hash] :body Record selection criteria
@@ -17,10 +17,11 @@ module Elasticsearch
           # @option arguments [String] :sort Sort records by a particular field
           # @option arguments [Boolean] :desc Set the sort direction
           #
-          # @see http://www.elastic.co/guide/en/x-pack/current/ml-get-record.html
+          # @see http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html
           #
           def get_records(arguments={})
             raise ArgumentError, "Required argument 'job_id' missing" unless arguments[:job_id]
+
             valid_params = [
               :exclude_interim,
               :from,
@@ -30,6 +31,7 @@ module Elasticsearch
               :record_score,
               :sort,
               :desc ]
+
             method = Elasticsearch::API::HTTP_GET
             path   = "_xpack/ml/anomaly_detectors/#{arguments[:job_id]}/results/records"
             params = Elasticsearch::API::Utils.__validate_and_extract_params arguments, valid_params

@@ -4,17 +4,19 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
+          # Stop a datafeed
           #
           # @option arguments [String] :datafeed_id The ID of the datafeed to stop (*Required*)
+          # @option arguments [Boolean] :allow_no_datafeeds Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)
           # @option arguments [Boolean] :force True if the datafeed should be forcefully stopped.
           # @option arguments [Time] :timeout Controls the time to wait until a datafeed has stopped. Default to 20 seconds
           #
-          # @see http://www.elastic.co/guide/en/x-pack/current/ml-stop-datafeed.html
+          # @see http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html
           #
           def stop_datafeed(arguments={})
             raise ArgumentError, "Required argument 'datafeed_id' missing" unless arguments[:datafeed_id]
             valid_params = [
+              :allow_no_datafeeds,
               :force,
               :timeout ]
             method = Elasticsearch::API::HTTP_POST

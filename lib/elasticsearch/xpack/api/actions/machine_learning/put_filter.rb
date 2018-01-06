@@ -4,12 +4,8 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
-          #
           # @option arguments [String] :filter_id The ID of the filter to create (*Required*)
           # @option arguments [Hash] :body The filter details (*Required*)
-          #
-          # @see [TODO]
           #
           def put_filter(arguments={})
             raise ArgumentError, "Required argument 'filter_id' missing" unless arguments[:filter_id]

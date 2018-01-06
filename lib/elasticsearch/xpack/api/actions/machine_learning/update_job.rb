@@ -4,12 +4,12 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
+          # Update certain properties of a job
           #
           # @option arguments [String] :job_id The ID of the job to create (*Required*)
           # @option arguments [Hash] :body The job update settings (*Required*)
           #
-          # @see http://www.elastic.co/guide/en/x-pack/current/ml-update-job.html
+          # @see http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html
           #
           def update_job(arguments={})
             raise ArgumentError, "Required argument 'job_id' missing" unless arguments[:job_id]

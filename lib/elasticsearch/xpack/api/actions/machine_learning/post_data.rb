@@ -4,14 +4,14 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
+          # Send data to an anomaly detection job for analysis
           #
           # @option arguments [String] :job_id The name of the job receiving the data (*Required*)
           # @option arguments [Hash] :body The data to process (*Required*)
           # @option arguments [String] :reset_start Optional parameter to specify the start of the bucket resetting range
           # @option arguments [String] :reset_end Optional parameter to specify the end of the bucket resetting range
           #
-          # @see http://www.elastic.co/guide/en/x-pack/current/ml-post-data.html
+          # @see http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html
           #
           def post_data(arguments={})
             raise ArgumentError, "Required argument 'job_id' missing" unless arguments[:job_id]

@@ -4,11 +4,7 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
-          #
           # @option arguments [String] :filter_id The ID of the filter to delete (*Required*)
-          #
-          # @see [TODO]
           #
           def delete_filter(arguments={})
             raise ArgumentError, "Required argument 'filter_id' missing" unless arguments[:filter_id]

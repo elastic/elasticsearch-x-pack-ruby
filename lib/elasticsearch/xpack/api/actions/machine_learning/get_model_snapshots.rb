@@ -4,7 +4,7 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
+          # Retrieve information about model snapshots
           #
           # @option arguments [String] :job_id The ID of the job to fetch (*Required*)
           # @option arguments [String] :snapshot_id The ID of the snapshot to fetch
@@ -16,7 +16,7 @@ module Elasticsearch
           # @option arguments [String] :sort Name of the field to sort on
           # @option arguments [Boolean] :desc True if the results should be sorted in descending order
           #
-          # @see http://www.elastic.co/guide/en/x-pack/current/ml-get-snapshot.html
+          # @see http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html
           #
           def get_model_snapshots(arguments={})
             raise ArgumentError, "Required argument 'job_id' missing" unless arguments[:job_id]

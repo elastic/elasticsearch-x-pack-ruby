@@ -4,7 +4,7 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
+          # Retrieve job results for one or more influencers
           #
           # @option arguments [String] :job_id [TODO] (*Required*)
           # @option arguments [Hash] :body Influencer selection criteria
@@ -17,7 +17,7 @@ module Elasticsearch
           # @option arguments [String] :sort sort field for the requested influencers
           # @option arguments [Boolean] :desc whether the results should be sorted in decending order
           #
-          # @see http://www.elastic.co/guide/en/x-pack/current/ml-get-influencer.html
+          # @see http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html
           #
           def get_influencers(arguments={})
             raise ArgumentError, "Required argument 'job_id' missing" unless arguments[:job_id]

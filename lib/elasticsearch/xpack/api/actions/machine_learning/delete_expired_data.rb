@@ -4,11 +4,6 @@ module Elasticsearch
       module MachineLearning
         module Actions
 
-          # TODO: Description
-          #
-          #
-          # @see [TODO]
-          #
           def delete_expired_data(arguments={})
             method = Elasticsearch::API::HTTP_DELETE
             path   = "_xpack/ml/_delete_expired_data"
