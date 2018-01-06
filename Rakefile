@@ -9,8 +9,8 @@ end
 Rake::TestTask.new('test:unit') do |test|
   test.libs << 'test'
   test.test_files = FileList['test/unit/**/*_test.rb']
-  # test.verbose = true
-  # test.warning = true
+  test.verbose = false
+  test.warning = false
 end
 
 namespace :test do
@@ -19,12 +19,7 @@ namespace :test do
     require 'ansi'
 
     suites = %w[
-      x-plugins/elasticsearch/x-pack/src/test/resources/rest-api-spec/test
-      x-plugins/elasticsearch/x-pack/graph/src/test/resources/rest-api-spec/test
-      x-plugins/elasticsearch/x-pack/monitoring/src/test/resources/rest-api-spec/test/monitoring
-      x-plugins/elasticsearch/x-pack/security/src/test/resources/rest-api-spec/test
-      x-plugins/elasticsearch/x-pack/watcher/src/test/resources/rest-api-spec/test/xpack/watcher
-      x-plugins/elasticsearch/x-pack/license-plugin/src/test/resources/rest-api-spec/test
+      plugin/src/test/resources/rest-api-spec/test/
     ]
 
     # TEMPORARY
@@ -59,7 +54,7 @@ namespace :test do
     suites.each do |suite|
       begin
         sh <<-COMMAND
-          TEST_REST_API_SPEC=../#{suite} bundle exec ruby -I lib:test test/integration/yaml_test_runner.rb
+          TEST_REST_API_SPEC=../x-pack-elasticsearch/#{suite} bundle exec ruby -I lib:test test/integration/yaml_test_runner.rb
         COMMAND
         executed_suites << { suite => 0 }
       rescue RuntimeError
