@@ -2,21 +2,24 @@
 #
 # Execute this file from the root of the repository:
 #
-#     bundle exec ruby -I lib ./examples/watcher/error_500.rb
+#     ALERT_EMAIL=email@example.com bundle exec ruby -I lib ./examples/watcher/error_500.rb
 #
 # The watch searches for `500` errors in a specific index on a periodic basis, and performs three
 # actions when at least 3 errors have been received in the last 5 minutes:
 #
 # 1. indexes the error documents and aggregations returned from search,
 # 2. sends a notification via e-mail, and
-# 3. sends the data to a HTTP API.
+# 3. sends the data to a webhook.
 #
 # If you want to test sending the e-mail, you have to configure Watcher:
 # <https://www.elastic.co/guide/en/x-pack/current/actions-email.html#configuring-email>
 #
-# You can run a simple Sinatra based web server to test the webhook action with this script:
+# NOTE: If you want to use Gmail and you have 2-factor authentication enabled,
+#       generate an "App password", and use it in the `password` field.
 #
-#     $ ruby -r sinatra -r json -e 'post("/") { json = JSON.parse(request.body.read); puts %Q~Received #{json["watch_id"]} with payload: #{json["payload"]}~ }'
+# You can run a simple Sinatra application to test the webhook action with this script:
+#
+#     $ ruby -r sinatra -r json -e 'post("/") { json = JSON.parse(request.body.read); puts %Q~Received [#{json["watch_id"]}] with payload: #{json["payload"]}~ }'
 #
 
 require 'elasticsearch'
@@ -25,15 +28,17 @@ require 'elasticsearch/xpack'
 client = Elasticsearch::Client.new url: 'http://elastic:changeme@localhost:9260', log: true
 client.transport.logger.formatter = proc do |severity, datetime, progname, msg| "\e[2m#{msg}\e[0m\n" end
 
+# Print information about the Watcher plugin
+#
+cluster_info = client.info
+xpack_info = client.xpack.info
+puts "Elasticsearch #{cluster_info['version']['number']} | X-Pack build [#{xpack_info['build']['hash']}]"
+
 # Delete the Watcher and test indices
 #
 ['test_errors', 'alerts', '.watcher-history-*'].each do |index|
   client.indices.delete index: index, ignore: 404
 end
-
-# Print information about the Watcher plugin
-#
-puts "X-Pack #{client.xpack.info['build']['hash']}"
 
 # Register a new watch
 #
@@ -86,11 +91,10 @@ client.xpack.watcher.put_watch id: 'error_500', body: {
         # Transform the data for the template
         #
         script: {
-          lang: 'painless',
-          inline: "[ 'total': ctx.payload.hits.total, 'hosts': ctx.payload.aggregations.hosts.buckets.collect(bucket -> [ 'host': bucket.key, 'errors': bucket.doc_count ]), 'errors': ctx.payload.hits.hits.collect(d -> d._source) ]"
+          source: "[ 'total': ctx.payload.hits.total, 'hosts': ctx.payload.aggregations.hosts.buckets.collect(bucket -> [ 'host': bucket.key, 'errors': bucket.doc_count ]), 'errors': ctx.payload.hits.hits.collect(d -> d._source) ]"
         }
       },
-      email: { to:        'alerts@example.com',
+      email: { to:        ENV.fetch('ALERT_EMAIL', 'alert@example.com'),
                subject:   '[ALERT] {{ctx.watch_id}}',
                body:      <<-BODY.gsub(/^ {28}/, ''),
                             Received {{ctx.payload.total}} errors in the last 5 minutes.
@@ -111,7 +115,7 @@ client.xpack.watcher.put_watch id: 'error_500', body: {
       transform: {
         script: {
           lang: 'painless',
-          inline: "[ 'watch_id': ctx.watch_id, 'payload': ctx.payload ]"
+          source: "[ 'watch_id': ctx.watch_id, 'payload': ctx.payload ]"
         }
       },
       index: { index: 'alerts', doc_type: 'alert' }
@@ -155,9 +159,14 @@ end; puts "\n"
 # Display information about watch execution
 #
 client.search(index: '.watcher-history-*', q: 'watch_id:error_500', sort: 'trigger_event.triggered_time:asc')['hits']['hits'].each do |r|
-  puts "#{r['_source']['watch_id']} #{r['_source']['state'].upcase} at #{r['_source']['result']['execution_time']}"
+  print "[#{r['_source']['watch_id']}] #{r['_source']['state'].upcase} at #{r['_source']['result']['execution_time']}"
+  if r['_source']['state'] == 'executed'
+    print " > Actions: "
+    print r['_source']['result']['actions'].map { |a| "[#{a['id']}] #{a['status']}#{a['error'] ? ': '+a['error']['type'] : ''}" }.join(', ')
+  end
+  print "\n"
 end
 
 # Delete the watch
 #
-client.xpack.watcher.delete_watch id: 'error_500', master_timeout: '30s', force: true
+client.xpack.watcher.delete_watch id: 'error_500', master_timeout: '30s'
