@@ -18,6 +18,9 @@ require 'test_helper'
 skip_features = 'stash_in_path,requires_replica,headers,warnings'
 SKIP_FEATURES = ENV.fetch('TEST_SKIP_FEATURES', skip_features)
 
+# Skip files where a pattern matches
+default_patterns = %r{xpack/15_basic|license/20_put_license|token/}
+SKIP_PATTERNS = Regexp.new( [default_patterns.to_s, ENV['TEST_SKIP_PATTERNS'] ].compact.join('|') )
 
 class String
   # Reset the `ansi` method on CI
@@ -276,6 +279,11 @@ suites.each do |suite|
     #
     files = Dir[suite.join('*.{yml,yaml}')]
     files.each do |file|
+      if file =~ SKIP_PATTERNS
+        $stderr.puts "SKIPPING FILE: #{file}"
+        next
+      end
+
       tests = YAML.load_documents File.new(file)
 
       # Extract setup and teardown actions
