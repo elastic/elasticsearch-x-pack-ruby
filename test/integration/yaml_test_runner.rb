@@ -15,7 +15,7 @@ require 'elasticsearch/extensions/test/profiling' unless JRUBY
 require 'test_helper'
 
 # Skip features
-skip_features = 'stash_in_path,requires_replica,headers,warnings'
+skip_features = 'stash_in_path,requires_replica,warnings'
 SKIP_FEATURES = ENV.fetch('TEST_SKIP_FEATURES', skip_features)
 
 # Skip files where a pattern matches
@@ -317,10 +317,19 @@ suites.each do |suite|
           setup do
             actions.select { |a| a['setup'] }.first['setup'].each do |action|
               if action['do']
+                if headers = action['do'] && action['do'].delete('headers')
+                  puts "HEADERS: " + headers.inspect if ENV['DEBUG']
+                  $client = Elasticsearch::Client.new url: $url, transport_options: { headers: headers }
+                  $client.transport.logger = $logger unless ENV['QUIET'] || ENV['CI']
+                else
+                  $client = $original_client
+                end
+
                 api, arguments = action['do'].to_a.first
                 arguments      = Utils.symbolize_keys(arguments)
                 Runner.perform_api_call((test.to_s + '___setup'), api, arguments)
               end
+
               if action['set']
                 stash = action['set']
                 property, variable = stash.to_a.first
