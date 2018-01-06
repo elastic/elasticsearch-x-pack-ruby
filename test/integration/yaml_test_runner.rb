@@ -18,17 +18,6 @@ require 'test_helper'
 skip_features = 'stash_in_path,requires_replica,headers,warnings'
 SKIP_FEATURES = ENV.fetch('TEST_SKIP_FEATURES', skip_features)
 
-# Launch test cluster
-#
-if ENV['SERVER'] and not Elasticsearch::Extensions::Test::Cluster.running?
-  es_params = "-D es.repositories.url.allowed_urls=http://snapshot.test* -D es.path.repo=/tmp -D es.node.testattr=test " + ENV['TEST_CLUSTER_PARAMS'].to_s
-  Elasticsearch::Extensions::Test::Cluster.start(nodes: 1, es_params: es_params )
-end
-
-# Register `at_exit` handler for server shutdown.
-# MUST be called before requiring `test/unit`.
-#
-at_exit { Elasticsearch::Extensions::Test::Cluster.stop if ENV['SERVER'] and Elasticsearch::Extensions::Test::Cluster.running? }
 
 class String
   # Reset the `ansi` method on CI

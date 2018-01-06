@@ -8,8 +8,6 @@ require 'shoulda/context'
 require 'mocha/mini_test'
 
 require 'ansi'
-require 'elasticsearch/extensions/test/startup_shutdown'
-require 'elasticsearch/extensions/test/cluster'
 
 require 'elasticsearch/xpack'
 

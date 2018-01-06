@@ -70,26 +70,3 @@ namespace :test do
     end
   end
 end
-
-namespace :elasticsearch do
-  desc "Start Elasticsearch node for tests"
-  task :start do
-    require 'elasticsearch/extensions/test/cluster'
-    Elasticsearch::Extensions::Test::Cluster.start(port: ENV.fetch('TEST_CLUSTER_PORT', 9260), nodes: 1, path_logs: '/tmp')
-  end
-
-  desc "Stop Elasticsearch node for tests"
-  task :stop do
-    require 'elasticsearch/extensions/test/cluster'
-    Elasticsearch::Extensions::Test::Cluster.stop(port: ENV.fetch('TEST_CLUSTER_PORT', 9260), nodes: 1)
-  end
-
-  task :status do
-    require 'elasticsearch/extensions/test/cluster'
-    begin
-      Elasticsearch::Extensions::Test::Cluster.__print_cluster_info(ENV.fetch('TEST_CLUSTER_PORT', 9260))
-    rescue Errno::ECONNREFUSED
-      puts "\e[31m[!] Test cluster not running\e[0m"; exit(1)
-    end
-  end
-end
