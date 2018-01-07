@@ -64,4 +64,18 @@ namespace :test do
       puts '', '-'*80, ''
     end
   end
+
+  desc "Run Elasticsearch with X-Pack installed (Docker)"
+    task :server do
+      sh <<-COMMAND.gsub(/^\s*/, '').gsub(/\s{1,}/, ' ')
+        docker run \
+          --name elasticsearch-xpack \
+          --env ELASTIC_PASSWORD=changeme \
+          --env cluster.name=elasticsearch-xpack-test \
+          --publish 9260:9200 \
+          --memory 4g \
+          --rm \
+          docker.elastic.co/elasticsearch/elasticsearch-platinum:6.1.1
+      COMMAND
+    end
 end

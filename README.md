@@ -42,6 +42,10 @@ official [X-Pack for the Elastic Stack](https://www.elastic.co/guide/en/x-pack/c
 
 For examples, look into the [`examples`](examples) folder in this repository.
 
+You can use the provided `test:server` Rake task to launch
+a [Docker-based](https://www.elastic.co/guide/en/elasticsearch/reference/6.1/docker.html#_image_types)
+Elasticsearch node with the full X-Pack license preinstalled.
+
 ## License
 
 This software is licensed under the Apache 2 license, quoted below.
