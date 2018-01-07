@@ -13,6 +13,7 @@ module Elasticsearch
           # @see https://www.elastic.co/guide/en/x-pack/current/security-api-users.html#security-api-put-user
           #
           def put_user(arguments={})
+            raise ArgumentError, "Required argument 'username' missing" unless arguments[:username]
             raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
             valid_params = [ :refresh ]
