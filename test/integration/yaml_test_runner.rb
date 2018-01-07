@@ -75,12 +75,14 @@ $client        ||= Elasticsearch::Client.new url: $url
 $helper_client ||= Elasticsearch::Client.new url: $url
 
 es_version_info = $helper_client.info['version']
+xpack_info      = $helper_client.xpack.info
 plugins         = $helper_client.cat.plugins(format: 'json')
 $es_version = es_version_info['number']
 
 puts '-'*80,
      "Elasticsearch #{$es_version.ansi(:bold)} [#{es_version_info['build_hash'].to_s[0...7]}]",
      "Plugins: " + plugins.map { |d| "#{d['component'].ansi(:bold)}:#{d['version']}"}.join(', '),
+     "X-Pack #{xpack_info['license']['type']} license is #{xpack_info['license']['status'].ansi(:bold)} and expires at #{Time.at(xpack_info['license']['expiry_date_in_millis']/1000)}",
      '-'*80
 
 $client.transport.logger = $logger unless ENV['QUIET'] || ENV['CI']
