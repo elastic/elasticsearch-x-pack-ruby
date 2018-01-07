@@ -19,8 +19,15 @@ skip_features = 'stash_in_path,requires_replica,warnings'
 SKIP_FEATURES = ENV.fetch('TEST_SKIP_FEATURES', skip_features)
 
 # Skip files where a pattern matches
-default_patterns = %r{xpack/15_basic|license/20_put_license|token/}
-SKIP_PATTERNS = Regexp.new( [default_patterns.to_s, ENV['TEST_SKIP_PATTERNS'] ].compact.join('|') )
+default_skip_patterns = [
+  '/xpack/10_basic.yml',      # Test fails, doesn't counts with more plugins installed, like `ingest-geoip`
+  '/xpack/15_basic',          # Test inserts invalid license, making all subsequent tests fail
+  '/license/20_put_license',  # Test inserts invalid license, making all subsequent tests fail
+  '/token/',                  # Tokens require full SSL setup (TODO)
+  '/ssl/10_basic'             # (?) Test relies on some external setup
+].join('|')
+
+SKIP_PATTERNS = Regexp.new( [default_skip_patterns, ENV['TEST_SKIP_PATTERNS'] ].compact.join('|') )
 
 class String
   # Reset the `ansi` method on CI
@@ -277,10 +284,10 @@ suites.each do |suite|
 
     # --- Parse tests ------------------------------------------------------
     #
-    files = Dir[suite.join('*.{yml,yaml}')]
-    files.each do |file|
+    Dir[suite.join('*.{yml,yaml}')].each do |file|
+
       if file =~ SKIP_PATTERNS
-        $stderr.puts "SKIPPING FILE: #{file}"
+        $stderr.puts "#{'SKIP FILE'.ansi(:yellow)} #{file.gsub(PATH.to_s, '')}"
         next
       end
 
@@ -292,7 +299,7 @@ suites.each do |suite|
 
       # Skip all the tests when `skip` is part of the `setup` part
       if features = Runner.skip?(setup_actions)
-        $stdout.puts "#{'SKIP'.ansi(:yellow)} [#{name}] #{file.gsub(PATH.to_s, '').ansi(:bold)} (Feature not implemented: #{features})"
+        $stdout.puts "#{'SKIP TEST'.ansi(:yellow)} [#{name}] #{file.gsub(PATH.to_s, '').ansi(:bold)} (Feature not implemented: #{features})"
         next
       end
 
@@ -309,7 +316,7 @@ suites.each do |suite|
           actions   = test.values.first
 
           if reason = Runner.skip?(actions)
-            $stdout.puts "#{'SKIP'.ansi(:yellow)} [#{name}] #{test_name} (Reason: #{reason})"
+            $stdout.puts "#{'SKIP TEST'.ansi(:yellow)} [#{name}] #{test_name} (Reason: #{reason})"
             next
           end
 
