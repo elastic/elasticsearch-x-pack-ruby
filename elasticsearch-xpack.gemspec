@@ -21,10 +21,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 11.1"
 
-  spec.add_dependency "elasticsearch-api"
+  spec.add_dependency "elasticsearch-api", '~> 6'
 
-  spec.add_development_dependency "elasticsearch", '~> 5'
-  spec.add_development_dependency "elasticsearch-transport", '~> 5'
+  spec.add_development_dependency "elasticsearch", '~> 6'
+  spec.add_development_dependency "elasticsearch-transport", '~> 6'
   spec.add_development_dependency "elasticsearch-extensions"
 
   spec.add_development_dependency "activesupport"
