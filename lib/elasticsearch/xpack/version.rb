@@ -1,5 +1,5 @@
 module Elasticsearch
   module XPack
-    VERSION = "5.5.0"
+    VERSION = "6.0.0"
   end
 end
