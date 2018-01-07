@@ -259,6 +259,9 @@ suites.each do |suite|
       $results = {}
       $stash   = {}
 
+      # Setup machine learning user
+      $helper_client.xpack.security.put_user username: 'x_pack_rest_user',  body: { password: 'x-pack-test-password', roles: ['superuser'] }
+
       # Cleanup for machine learning
       # https://github.com/elastic/x-pack-elasticsearch/blob/5.5/plugin/src/test/java/org/elasticsearch/xpack/ml/integration/MlRestTestStateCleaner.java
       $helper_client.xpack.ml.stop_datafeed datafeed_id: '_all', force: true
@@ -279,6 +282,16 @@ suites.each do |suite|
     # --- Register context teardown ----------------------------------------
     #
     teardown do
+      $helper_client.xpack.ml.stop_datafeed datafeed_id: '_all', force: true
+      $helper_client.xpack.ml.get_datafeeds['datafeeds'].each do |d|
+        $helper_client.xpack.ml.delete_datafeed datafeed_id: d['datafeed_id']
+      end
+
+      $helper_client.xpack.ml.close_job job_id: '_all', force: true
+      $helper_client.xpack.ml.get_jobs['jobs'].each do |d|
+        $helper_client.xpack.ml.delete_job job_id: d['job_id']
+      end
+
       $helper_client.indices.delete index: '_all', ignore: 404 if ENV['CLEANUP']
     end
 
